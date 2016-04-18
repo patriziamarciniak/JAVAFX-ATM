@@ -2,6 +2,7 @@
 import javafx.application.Application;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,32 +10,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-
-import javafx.application.Application;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
-
 
 public class ATMView extends Application {
 
 
     private ATMPresenter presenter;
-    private Pane root, root1, root2, root3;
+    private Pane root, root1, root2;
     Stage theStage;
     Scene scene, scene1, scene2, scene3, scene4;
     MenuBar menuBar;
@@ -106,7 +90,7 @@ goBackFromPaying();
         root.lookup("#buttonChangePIN").setOnMouseClicked(event -> setChangePINScene());
 
 
-        this.presenter = new ATMPresenter(this);
+        presenter = new ATMPresenter(this);
         this.theStage = primaryStage;
 
         this.scene = new Scene(root, 600, 550);
@@ -162,11 +146,11 @@ public void goBackFromPaying(){
         }
     }
 
-    public int getPINtoChange(int i) {
-        if (((TextField) (root2.lookup("#textpin" + i))).getText().trim().isEmpty()) {
+    public int getPIN(int i) {
+        if (((TextField) (root2.lookup("#text" + i))).getText().trim().isEmpty()) {
             return 0;
         } else {
-            return Integer.parseInt(((TextField) (root2.lookup("#textpin" + i ))).getText());
+            return Integer.parseInt(((TextField) (root2.lookup("#text" + i ))).getText());
         }
     }
 
@@ -239,6 +223,7 @@ public void goBackFromPaying(){
 
         theStage.setScene(scene);
         theStage.show();
+//        ((Label)(root.lookup( "#labelSaldo" ))).textProperty().bind(new SimpleIntegerProperty(presenter.atm.user.saldo).asString());
 
     }
 
@@ -295,20 +280,20 @@ public void goBackFromPaying(){
     }
 
     public void setSceneNoteFile(){
-        root3 = new Pane();
+        root1 = new Pane();
 
         try {
-            root3 = FXMLLoader.load(getClass()
+            root1 = FXMLLoader.load(getClass()
                     .getResource("/atmFileManager.fxml"));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        scene1 = new Scene(root3, 350, 200);
+        scene1 = new Scene(root1, 350, 200);
         theStage.setScene(scene1);
 
-        root3.lookup("#buttonFileCancel").setOnMouseClicked(event -> setStartScene());
-        root3.lookup("#buttonFileOk").setOnMouseClicked(event -> presenter.buttonNoteFileOkClicked());
+        root1.lookup("#buttonFileCancel").setOnMouseClicked(event -> setStartScene());
+        root1.lookup("#buttonFileOk").setOnMouseClicked(event -> presenter.buttonNoteFileOkClicked());
     }
 }
 

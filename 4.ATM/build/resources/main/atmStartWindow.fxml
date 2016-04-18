@@ -99,7 +99,7 @@
                 <Label layoutX="22.0" layoutY="129.0" prefHeight="17.0" prefWidth="57.0" text="PIN" />
                 <Label layoutX="59.0" layoutY="31.0" prefHeight="17.0" prefWidth="83.0" text="Numer karty" />
                 <TextField id="textCardNr" layoutY="60.0" prefHeight="25.0" prefWidth="200.0" />
-                <TextField id="textPIN" fx:id="textPIN" layoutX="70.0" layoutY="125.0" prefHeight="25.0" prefWidth="98.0" />
+                <TextField fx:id="textPIN" layoutX="70.0" layoutY="125.0" prefHeight="25.0" prefWidth="98.0" />
             </children>
         </Pane>
         <Pane id="paneTransaction" layoutX="368.0" layoutY="202.0" prefHeight="200.0" prefWidth="200.0" visible="false">

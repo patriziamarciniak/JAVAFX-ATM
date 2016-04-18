@@ -3,16 +3,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-
-import java.io.IOException;
 
 public class ATMPresenter {
 
@@ -59,6 +49,8 @@ public class ATMPresenter {
     protected void buttonChooseNotesClicked() {
 
         List<Integer> notes = new ArrayList<Integer>();
+
+
         int suma = 0;
 
         notes.add(view.getNote(200));
@@ -66,6 +58,7 @@ public class ATMPresenter {
         notes.add(view.getNote(50));
         notes.add(view.getNote(20));
         notes.add(view.getNote(10));
+
 
         suma += notes.get(0) * 200;
         suma += notes.get(1) * 100;
@@ -100,7 +93,7 @@ public class ATMPresenter {
         }
 
         view.showAlert("Na konto wpłacono " + suma + " zł");
-//        view.goBackFromPaying();
+        view.goBackFromPaying();
     }
 
     @FXML
@@ -123,7 +116,9 @@ public class ATMPresenter {
                             e.printStackTrace();
                         }
 
+
                         view.showAlert("Wypłacono " + value + " zł");
+
 
                     } else {
                         view.showAlert("Kwota nie jest wielokrotnością 10");
@@ -135,6 +130,7 @@ public class ATMPresenter {
                 view.showAlert("Nie posiadasz wystarczających środków na koncie");
             }
         }
+
     }
 
     @FXML
@@ -165,8 +161,8 @@ public class ATMPresenter {
     @FXML
     protected void buttonChangePINClicked(){
 
-        int newPIN = view.getPINtoChange(2);
-        int oldPIN = view.getPINtoChange(1);
+        int newPIN = view.getPIN(2);
+        int oldPIN = view.getPIN(1);
 
         if (newPIN == 0 || oldPIN == 0 || newPIN < 1000 || newPIN > 9999 || oldPIN < 1000 || oldPIN > 9999) {
             view.showAlert("Błędny numer PIN");
